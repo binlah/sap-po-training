@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="urn:binlah.com:ERP:HR:Personnel" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:binlah.com:ERP:HR:Personnel"><xsd:complexType name="DT_Search"><xsd:sequence><xsd:element name="id" type="xsd:int"/><xsd:element name="type" type="xsd:string"/></xsd:sequence></xsd:complexType></xsd:schema>

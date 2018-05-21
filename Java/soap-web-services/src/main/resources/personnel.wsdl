@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="SI_Personnel_Out" targetNamespace="urn:binlah.com:ERP:HR:Personnel" xmlns:p1="urn:binlah.com:ERP:HR:Personnel" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+	<wsdl:documentation/>
+	<wsp:UsingPolicy wsdl:required="true"/>
+	<wsp:Policy wsu:Id="OP_SI_PersonnelQuery_Out"/>
+	<wsdl:types>
+		<xsd:schema targetNamespace="urn:binlah.com:ERP:HR:Personnel" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:binlah.com:ERP:HR:Personnel">
+			<xsd:element name="MT_Search" type="DT_Search"/>
+			<xsd:element name="MT_Personnel" type="DT_Personnel"/>
+			<xsd:complexType name="DT_NameAndValue">
+				<xsd:annotation>
+					<xsd:appinfo source="http://sap.com/xi/VersionID">68c2e57d490a11e8c50c00000037505a</xsd:appinfo>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="name" type="xsd:string"/>
+					<xsd:element name="value" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="DT_Search">
+				<xsd:annotation>
+					<xsd:appinfo source="http://sap.com/xi/VersionID">e78c5d3e4aa411e8abe800000037505a</xsd:appinfo>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="id" type="xsd:int">
+						<xsd:annotation>
+							<xsd:appinfo source="http://sap.com/xi/TextID">a9ac62d34a0611e8855e025041000001</xsd:appinfo>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="type" type="xsd:string">
+						<xsd:annotation>
+							<xsd:appinfo source="http://sap.com/xi/TextID">ee902a384aa411e8c1bf025041000001</xsd:appinfo>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="DT_Personnel">
+				<xsd:annotation>
+					<xsd:appinfo source="http://sap.com/xi/VersionID">4d669a564d1d11e8afab00000037505a</xsd:appinfo>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="id" type="xsd:string">
+						<xsd:annotation>
+							<xsd:appinfo source="http://sap.com/xi/TextID">befefa42490911e8b6ab025041000001</xsd:appinfo>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="name" type="xsd:string">
+						<xsd:annotation>
+							<xsd:appinfo source="http://sap.com/xi/TextID">befefa43490911e8ca43025041000001</xsd:appinfo>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="additionl" type="DT_NameAndValue" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:appinfo source="http://sap.com/xi/TextID">d10365db490911e88733025041000001</xsd:appinfo>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+				<xsd:attribute name="type" type="xsd:string"/>
+			</xsd:complexType>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="MT_Search">
+		<wsdl:documentation/>
+		<wsdl:part name="MT_Search" element="p1:MT_Search"/>
+	</wsdl:message>
+	<wsdl:message name="MT_Personnel">
+		<wsdl:documentation/>
+		<wsdl:part name="MT_Personnel" element="p1:MT_Personnel"/>
+	</wsdl:message>
+	<wsdl:portType name="SI_Personnel_Out">
+		<wsdl:documentation/>
+		<wsdl:operation name="SI_PersonnelQuery_Out">
+			<wsdl:documentation/>
+			<wsp:Policy>
+				<wsp:PolicyReference URI="#OP_SI_PersonnelQuery_Out"/>
+			</wsp:Policy>
+			<wsdl:input message="p1:MT_Search"/>
+			<wsdl:output message="p1:MT_Personnel"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="SI_Personnel_OutBinding" type="p1:SI_Personnel_Out">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+		<wsdl:operation name="SI_PersonnelQuery_Out">
+			<soap:operation soapAction="http://sap.com/xi/WebService/soap1.1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+			<wsdl:input>
+				<soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="SI_Personnel_OutService">
+		<wsdl:port name="HTTP_Port" binding="p1:SI_Personnel_OutBinding">
+			<soap:address location="http://bndca013.sapcloud.tcc-technology.com:50000/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=CPF&amp;receiverParty=&amp;receiverService=&amp;interface=SI_Personnel_Out&amp;interfaceNamespace=urn%3Abinlah.com%3AERP%3AHR%3APersonnel" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+		</wsdl:port>
+		<wsdl:port name="HTTPS_Port" binding="p1:SI_Personnel_OutBinding">
+			<soap:address location="https://bndca013.sapcloud.tcc-technology.com:50001/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=CPF&amp;receiverParty=&amp;receiverService=&amp;interface=SI_Personnel_Out&amp;interfaceNamespace=urn%3Abinlah.com%3AERP%3AHR%3APersonnel" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
