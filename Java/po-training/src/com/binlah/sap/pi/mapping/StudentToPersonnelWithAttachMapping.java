@@ -29,6 +29,8 @@ import com.binlah.sap.pi.mapping.domain.Personnel;
 import com.binlah.sap.pi.mapping.domain.Student;
 import com.sap.aii.mapping.api.AbstractTransformation;
 import com.sap.aii.mapping.api.Attachment;
+import com.sap.aii.mapping.api.DynamicConfiguration;
+import com.sap.aii.mapping.api.DynamicConfigurationKey;
 import com.sap.aii.mapping.api.InputAttachments;
 import com.sap.aii.mapping.api.StreamTransformationException;
 import com.sap.aii.mapping.api.TransformationInput;
@@ -43,11 +45,12 @@ public class StudentToPersonnelWithAttachMapping extends AbstractTransformation 
 	private final Student student = new Student();
 	private final Personnel personnel = new Personnel();
 
+	// private SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd-HHmmss-SSS");
+
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.sap.aii.mapping.api.AbstractTransformation#transform(com.sap.aii.mapping.api.TransformationInput,
-	 * com.sap.aii.mapping.api.TransformationOutput)
+	 * @see com.sap.aii.mapping.api.AbstractTransformation#transform(com.sap.aii.mapping.api.TransformationInput, com.sap.aii.mapping.api.TransformationOutput)
 	 */
 	@Override
 	public void transform(TransformationInput input, TransformationOutput output) throws StreamTransformationException {
@@ -59,6 +62,11 @@ public class StudentToPersonnelWithAttachMapping extends AbstractTransformation 
 
 		try {
 			// is = new ByteArrayInputStream(content);
+			DynamicConfiguration conf = input.getDynamicConfiguration();
+			DynamicConfigurationKey confKeyFileName = DynamicConfigurationKey.create("http://sap.com/xi/XI/System/File", "FileName");
+			// conf.put(confKeyFileName, "personnel_" + sdf.format(new Date()) + ".xml");
+			conf.put(confKeyFileName, "personnel_.xml");
+
 			mainInputStream = input.getInputPayload().getInputStream();
 
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
